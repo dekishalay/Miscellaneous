@@ -14,7 +14,7 @@ import astropy.units as u
 from astropy.time import Time
 import psrqpy
 expArgs = 2
-sunDistThresh = 10
+sunDistThresh = 10 #sun distance threshold in degrees
 
 def getSunDist(psrName, toa):
 	'''
