@@ -41,7 +41,6 @@ def getSunDist(psrName, toa):
 		sys.exit(1)
 	
 	c = SkyCoord(ra=tab['RAJ'][0], dec=tab['DECJ'][0], frame='icrs', unit=(u.hourangle, u.deg))
-	c = c.transform_to('gcrs')
 	
 	t = Time(toa, format='mjd')
 	sun = get_sun(t)
