@@ -46,6 +46,8 @@ def getSunDist(psrName, toa):
 	t = Time(toa, format='mjd')
 	sun = get_sun(t)
 	
+	#Apparently this only works in the sun.separation(c) form; NOT the c.separation(sun) form
+	#Has to do with conversions between ICRS and GCRS frames
 	sep = sun.separation(c)
 
 	return sep.degree
