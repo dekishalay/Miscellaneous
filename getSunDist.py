@@ -33,19 +33,21 @@ def getSunDist(psrName, toa):
 	'''
 	
 	q = psrqpy.QueryATNF(params=['RaJ','DecJ'], psrs=[psrName])
-	t = q.table()
+	tab = q.table()
 
-	if len(t) == 0:
+	if len(tab) == 0:
 		print('No pulsar found with name %s in ATNF! Try again.'%psrName)
 		print('\n\n')
 		sys.exit(1)
 	
-	c = SkyCoord(ra=t['RAJ'][0], dec=t['DECJ'][0], frame='icrs', unit=(u.hourangle, u.deg))
+	c = SkyCoord(ra=tab['RAJ'][0], dec=tab['DECJ'][0], frame='icrs', unit=(u.hourangle, u.deg))
+	c = c.transform_to('gcrs')
 	
 	t = Time(toa, format='mjd')
 	sun = get_sun(t)
 	
-	sep = c.separation(sun)
+	sep = sun.separation(c)
+
 	return sep.degree
 
 	
